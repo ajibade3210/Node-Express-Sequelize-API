@@ -53,6 +53,21 @@ const getPublishedProduct = async (req, res) => {
   res.status(200).send(product);
 };
 
+// 7. Connect ONE to MANY Relation Product and Reviews
+const getProductReviews = async (req, res) => {
+  const data = await Product.findAll({
+    include: [
+      {
+        model: Review,
+        as: "review",
+      },
+    ],
+    where: { id: 2 },
+  });
+  res.status(200).send(data);
+  console.log("hgf");
+};
+
 module.exports = {
   addProduct,
   getAllProducts,
@@ -60,4 +75,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getPublishedProduct,
+  getProductReviews,
 };
